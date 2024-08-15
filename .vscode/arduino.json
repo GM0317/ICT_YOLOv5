@@ -1,0 +1,7 @@
+{
+    "sketch": "opp.ino\\opp.ino.ino",
+    "configuration": "mode=on",
+    "board": "arduino:megaavr:uno2018",
+    "port": "COM5",
+    "programmer": "medbg"
+}
