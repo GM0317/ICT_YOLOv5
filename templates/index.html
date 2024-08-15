@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Flask & YOLOv5 Real Time Inference</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        body {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 100%;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            text-align: left;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar ul li img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .sidebar ul li span {
+            font-weight: bold;
+        }
+
+        .main-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .title-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title-container img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .title-container h1 {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .video-container {
+            justify-content: center;
+            text-align: center;
+            height: 100%;
+            /*border: 1px solid black;*/
+        }
+
+        .corner {
+            border-radius: 25px;
+            border: 2px solid #000000; /* Thin black border */
+            width: 100%;
+            height: auto;
+            text-align: center;
+        }
+
+        .status-text {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h2>Developers</h2>
+        <ul>
+            <li>
+                <img src="{{ url_for('static', filename='소희.jpg') }}" alt="Profile">
+                <span>Yoon Sohee</span> - Lead Developer
+            </li>
+            <li>
+                <img src="{{ url_for('static', filename='영은.jpg') }}" alt="Profile">
+                <span>Seo Youngeun</span> - Frontend Developer
+            </li>
+            <li>
+                <img src="{{ url_for('static', filename='준영.jpg') }}" alt="Profile">
+                <span>Choi Junyoung</span> - Frontend Developer
+            </li>
+            <li>
+                <img src="{{ url_for('static', filename='경윤.jpg') }}" alt="Profile">
+                <span>Lee Kyungyoon</span> - Backend Developer
+            </li>
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="title-container">
+            <img src="{{ url_for('static', filename='cctv2.png') }}" alt="PyTorch Logo">
+            <h1>블랙박스를 활용한 음주 판독 AI</h1>
+        </div>
+        <div class="video-container">
+            <img src="{{ url_for('video') }}" class="corner" alt="Video Stream">
+            <div id="status" class="status-text">No object detected</div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        function updateStatus() {
+            $.getJSON('/status', function(data) {
+                $('#status').text(data.status);
+            });
+        }
+        setInterval(updateStatus, 1000);  // Update every second
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
